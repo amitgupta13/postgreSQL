@@ -1,0 +1,53 @@
+Go to https://dbdiagram.io/d and paste below code for db design for instagram
+
+Table users {
+  id serial [pk, increment]
+  username varchar(30)
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table comments {
+  id serial [pk, increment]
+  contents varchar(240)
+  user_id integer [ref: > users.id]
+  post_id integer [ref: > posts.id]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table posts {
+  id serial [pk, increment]
+  caption varchar(240)
+  lat real
+  lng real
+  url varchar(200)
+  user_id integer [ref: > users.id]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table likes {
+  id serial [pk, increment]
+  created_at timestamp
+  user_id integer [ref: > users.id]
+  comment_id integer [ref: > comments.id]
+  posts_id integer [ref: > posts.id]
+}
+
+Table photo_tags {
+  id serial [pk, increment]
+  created_at timestamp
+  updated_at timestamp
+  post_id integer [ref: > posts.id]
+  user_id integer [ref: > users.id]
+  x integer
+  y integer
+}
+
+Table caption_tags {
+  id serial [pk, increment]
+  created_at timestamp
+  post_id integer [ref: > posts.id]
+  user_id integer [ref: > users.id]
+}
