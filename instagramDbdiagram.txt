@@ -1,10 +1,14 @@
-Go to https://dbdiagram.io/d and paste below code for db design for instagram
-
 Table users {
   id serial [pk, increment]
   username varchar(30)
   created_at timestamp
   updated_at timestamp
+  bio varchar(400)
+  avatar varchar(200)
+  phone varchar(25)
+  email varchar(40)
+  password varchar(50)
+  status varchar(15)
 }
 
 Table comments {
@@ -50,4 +54,23 @@ Table caption_tags {
   created_at timestamp
   post_id integer [ref: > posts.id]
   user_id integer [ref: > users.id]
+}
+
+Table hashtags {
+  id serial [pk, increment]
+  created_at timestamp
+  title varchar(20)
+}
+
+Table hastags_posts {
+  id serial [pk, increment]
+  hastag_id integer [ref: > hashtags.id]
+  post_id integer [ref: > posts.id]
+}
+
+Table followers {
+  id serial [pk, increment]
+  created_at timestamp
+  leader_id integer [ref: > users.id]
+  follower_id integer [ref: > users.id]
 }
